@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Base Zero - Survey</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    .logo {
+      width: 160px;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #003366;
+    }
+    h3 {
+      background-color: #e0ecf7;
+      padding: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .section-content {
+      display: none;
+      padding: 1rem 0;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+    pre {
+      background-color: #f0f4f8;
+      padding: 1rem;
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
+    #loading {
+      display: none;
+      margin-top: 1rem;
+      color: #007bff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-style: italic;
+    }
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #007bff;
+      border-top: 3px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://www.myspot.it/static/media/logo-myspot.0b7d79b8.svg" class="logo" alt="Logo MySpot">
+    <h2>Definizione Budget Immobiliare - Survey Completa</h2>
+    <form id="budgetForm">
+      
+      <h3 onclick="toggleSection(this)">SEZIONE A – Inquadramento Generale</h3>
+      <div class="section-content">
+        <label>Settore di Riferimento:
+          <select name="settore">
+            <option value="Uffici">Uffici</option>
+            <option value="Sanità">Sanità</option>
+            <option value="Formazione">Formazione</option>
+            <option value="Alberghiero">Alberghiero</option>
+            <option value="Retail">Retail</option>
+            <option value="Altro">Altro</option>
+          </select>
+        </label>
+        <label>Totale immobili gestiti:<input name="immobili" type="number" required></label>
+        <label>Superficie totale gestita (mq):<input name="superficie" type="number" required></label>
+        <label>Numero totale dipendenti:<input name="dipendenti" type="number" required></label>
+        <label>Presenza geografica:<br>
+          <input type="checkbox" name="presenza" value="NORD EST"> NORD EST<br>
+          <input type="checkbox" name="presenza" value="NORD OVEST"> NORD OVEST<br>
+          <input type="checkbox" name="presenza" value="CENTRO"> CENTRO<br>
+          <input type="checkbox" name="presenza" value="SUD"> SUD<br>
+          <input type="checkbox" name="presenza" value="ISOLE"> ISOLE
+        </label>
+      </div>
+
+      <h3 onclick="toggleSection(this)">SEZIONE B – Modello Operativo</h3>
+      <div class="section-content">
+        <label>Modello operativo adottato:
+          <select name="modello_operativo">
+            <option value="In house">In house</option>
+            <option value="Outsourcing">Outsourcing</option>
+            <option value="Misto">Misto</option>
+          </select>
+        </label>
+        <label>Presenza di strumenti di controllo:
+          <select name="strumenti_controllo">
+            <option value="Sì">Sì</option>
+            <option value="No">No</option>
+            <option value="Parziale">Parziale</option>
+          </select>
+        </label>
+        <label>Struttura di governo del servizio:<input name="governo_servizio"></label>
+      </div>
+
+      <h3 onclick="toggleSection(this)">SEZIONE C – Servizi Richiesti</h3>
+      <div class="section-content">
+        <label>Servizi richiesti:<br>
+          <input type="checkbox" name="servizi" value="Pulizie"> Pulizie<br>
+          <input type="checkbox" name="servizi" value="Manutenzione ordinaria"> Manutenzione ordinaria<br>
+          <input type="checkbox" name="servizi" value="Reception"> Reception<br>
+          <input type="checkbox" name="servizi" value="Sicurezza"> Sicurezza<br>
+          <input type="checkbox" name="servizi" value="Servizi spazi esterni"> Servizi spazi esterni<br>
+          <input type="checkbox" name="servizi" value="Altro"> Altro
+        </label>
+      </div>
+
+      <h3 onclick="toggleSection(this)">SEZIONE D – Investimenti</h3>
+      <div class="section-content">
+        <label>Hai in programma investimenti futuri?
+          <select name="investimenti_previsti">
+            <option value="Nessuno">Nessuno</option>
+            <option value="Ristrutturazione">Ristrutturazione</option>
+            <option value="Arredi">Arredi</option>
+            <option value="Tecnologia">Tecnologia</option>
+            <option value="Altro">Altro</option>
+          </select>
+        </label>
+        <label>Note sugli investimenti:<textarea name="note_investimenti"></textarea></label>
+      </div>
+
+      <h3 onclick="toggleSection(this)">SEZIONE E – Obiettivi</h3>
+      <div class="section-content">
+        <label>Obiettivi principali della gestione:<textarea name="obiettivi_gestione"></textarea></label>
+        <label>Note o priorità specifiche:<textarea name="note_obiettivi"></textarea></label>
+      </div>
+
+      <button type="submit">Genera Budget</button>
+    </form>
+    <div id="loading"><div class="spinner"></div> Calcolo del budget in corso...</div>
+    <h3>Risultato:</h3>
+    <pre id="risultato"></pre>
+  </div>
+
+  <script>
+    function toggleSection(header) {
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === "block" ? "none" : "block";
+    }
+
+    const form = document.getElementById('budgetForm');
+    const loading = document.getElementById('loading');
+    const risultato = document.getElementById('risultato');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      risultato.innerText = '';
+      loading.style.display = 'flex';
+
+      const dati = new FormData(form);
+      const servizi = Array.from(form.querySelectorAll('input[name="servizi"]:checked')).map(cb => cb.value);
+      const presenza = Array.from(form.querySelectorAll('input[name="presenza"]:checked')).map(cb => cb.value);
+
+      const prompt = `L'organizzazione opera nel settore ${dati.get('settore')} con una gestione di ${dati.get('immobili')} immobili e una superficie di ${dati.get('superficie')} mq.\nHa ${dati.get('dipendenti')} dipendenti e presenza geografica in: ${presenza.join(', ')}.\nModello operativo: ${dati.get('modello_operativo')}, controllo: ${dati.get('strumenti_controllo')}.\nGoverno: ${dati.get('governo_servizio')}.\nServizi: ${servizi.join(', ')}.\nInvestimenti: ${dati.get('investimenti_previsti')} – ${dati.get('note_investimenti')}.\nObiettivi: ${dati.get('obiettivi_gestione')} – ${dati.get('note_obiettivi')}.\nFornisci un budget base zero suddiviso in Rent, Opex, Capex, Costi di Governo, con spiegazione sintetica.`;
+
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/gpt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+        risultato.innerText = data.result || `⚠️ Errore dal server: ${data.error || 'Nessuna risposta ricevuta'}`;
+      } catch (error) {
+        console.error('Errore nella richiesta:', error);
+        risultato.innerText = '❌ Errore nella connessione al server.';
+      } finally {
+        loading.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
