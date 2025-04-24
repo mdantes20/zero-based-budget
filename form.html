@@ -194,7 +194,7 @@
       const prompt = `L'organizzazione opera nel settore ${dati.get('settore')} con una gestione di ${dati.get('immobili')} immobili e una superficie di ${dati.get('superficie')} mq.\nHa ${dati.get('dipendenti')} dipendenti e presenza geografica in: ${presenza.join(', ')}.\nModello operativo: ${dati.get('modello_operativo')}, controllo: ${dati.get('strumenti_controllo')}.\nGoverno: ${dati.get('governo_servizio')}.\nServizi: ${servizi.join(', ')}.\nInvestimenti: ${dati.get('investimenti_previsti')} – ${dati.get('note_investimenti')}.\nObiettivi: ${dati.get('obiettivi_gestione')} – ${dati.get('note_obiettivi')}.\nFornisci un budget base zero suddiviso in Rent, Opex, Capex, Costi di Governo, con spiegazione sintetica.`;
 
       try {
-        const res = await fetch('http://127.0.0.1:5000/api/gpt', {
+        const res = await fetch('https://zero-based-budget-3hek.onrender.com/api/gpt', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt })
